@@ -1,6 +1,8 @@
 import axios from "axios";
 import { API_KEY, elements } from "./refs";
-import { fetchBreeds, fetchCatByBreed, createMarkup} from "./cat-api";
+import { fetchBreeds, fetchCatByBreed, createMarkup } from "./cat-api";
+import SlimSelect from 'slim-select';
+import 'slim-select/dist/slimselect.css';
 
 axios.defaults.headers.common["x-api-key"] = API_KEY;
 
@@ -9,6 +11,9 @@ fetchBreeds()
         elements.select.innerHTML = breeds.map(({ id, name }) => {
             return `<option value="${id}">${name}</option>`;
         }).join('');
+        new SlimSelect({
+            select: elements.select
+        })
     })
     .catch(error => console.log(error));
 
